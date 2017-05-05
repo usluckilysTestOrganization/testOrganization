@@ -1,5 +1,5 @@
 <template>
-  <div style="position:relative;z-index:1">
+  <!--<div style="position:relative;z-index:1">-->
     <!--<input v-model="query" key="query">-->
     <transition-group tag="ul"
                       name="slider-left"
@@ -28,7 +28,7 @@
 
       <!--<li v-bind:key="deleteData"><button @click="deleteData" >delete</button></li>-->
     </transition-group>
-  </div>
+  <!--</div>-->
 
 </template>
 <script>
@@ -115,8 +115,7 @@ import $ from 'jquery'
 //          } }
 //        )
 //        this.list.splice(index,1)
-        this.show = false
-//        _this.$router.push({path:'/details'})
+        _this.$router.push({path:'/details'})
 
       },
 
@@ -126,8 +125,24 @@ import $ from 'jquery'
     },
     created(){
       touch.init(window);
+      let _this = this
+      _this.$router.beforeEach(function(to,from,next){
+        console.log('beforeEach');
+        let len = _this.computedList.length
+        if(from.path == '/homepage'){
+          _this.show = false
+          setTimeout(function(){
+            next()
+          },200*len);
+        }else{
+          next()
+        }
+
+
+      })
     },
     mounted(){
+      console.log('mounted')
       let _this = this
       for(var i in _this.obj){
         _this.list.push(_this.obj[i])
@@ -135,9 +150,7 @@ import $ from 'jquery'
 
     },
     beforeDestroy(){
-      let _this = this
-      _this.list.splice(Math.random()*_this.list.length,1)
-      console.log(_this.list)
+      console.log('beforeDestroy')
     },
     watch:{
       '$route' :function(to, from){

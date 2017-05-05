@@ -1,5 +1,5 @@
 <template>
-  <transition>
+  <transition name="">
     <div class="pagebox all" style="position:relative;z-index:1">
       <slider_bar :parentData="obj.list" ></slider_bar>
     </div>
@@ -29,4 +29,18 @@
 </script>
 <style>
   .pagebox{position:relative;}
+  .hello-leave-active{
+    transition:right 3s ease;
+    right:-100%;
+  }
+  .hello-enter-active{
+    transition:right 3s ease;
+    right:0;
+  }
+  .hello-enter{
+    right:-100%
+  }
+  .hello-leave{
+    right:0;
+  }
 </style>

@@ -116,7 +116,7 @@ import $ from 'jquery'
 //          } }
 //        )
 //        this.list.splice(index,1)
-        _this.$router.push({path:'/details'})
+        _this.$router.push({path:'/details/'+index})
 
       },
 

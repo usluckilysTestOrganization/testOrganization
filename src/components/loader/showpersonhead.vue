@@ -14,7 +14,7 @@
         name:'loader',
         data () {
             return {
-              headPic:require('../../assets/logo.png'),
+              headPic:require('../../assets/img/11.png'),
               test:false
             }
         },
@@ -32,6 +32,7 @@
 </script>
 <style scoped>
   .loader-box{position:fixed;width:100%;height:100%;top:0;left:0;display:flex;align-items:center;justify-content:center;}
+  .loader-pic{position:relative;top: -6rem;}
   .loader-enter-active{
     transition:opacity 0.5s ease;
     opacity:1

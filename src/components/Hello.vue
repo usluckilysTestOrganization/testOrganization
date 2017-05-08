@@ -56,11 +56,11 @@ a {
 }
 
   .hello-leave-active{
-    transition:right 3s ease;
+    transition:right 0.3s ease;
     right:-100%;
   }
   .hello-enter-active{
-    transition:right 3s ease;
+    transition:right 0.3s ease;
     right:0;
   }
   .hello-enter{

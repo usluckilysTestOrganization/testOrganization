@@ -17,12 +17,13 @@
 
       <li class="slider-bar" v-for="(item, index) in computedList"
           v-bind:key="item.id"
-          v-bind:data-index="index" @click="test($event,index)"
+          v-bind:data-index="index"
+          @click="test($event,index)"
           :style="'background-color:rgb(48,'+(index*3+150)+', 247)'"
-          v-if="show"
+          v-if="$store.state.sliderShow"
       >
 
-        <div class="slider-bar-inner">{{ item.msg }}</div>
+        <div class="slider-bar-inner" >{{ item.msg }} {{ $store.state.sliderShow }}</div>
 
       </li>
 
@@ -41,10 +42,10 @@ import $ from 'jquery'
     props:['parentData'],
     data () {
       return {
-        obj:this.parentData,
+        obj:this.parentData || [{msg:'安静是打算',id:'1'},{msg:'非得分',id:'2'},{msg:'个风格',id:'3'},{msg:'阿斯顿',id:'4'},{msg:'更大阿迪',id:'5'},{msg:'规范化风格',id:'6'},{msg:'非郭德纲的',id:'7'}],
         query: '',
         list:[],
-        show:true
+        show:this.$store.state.sliderShow
       }
     },
     computed:{
@@ -126,20 +127,27 @@ import $ from 'jquery'
     created(){
       touch.init(window);
       let _this = this
-      _this.$router.beforeEach(function(to,from,next){
-        console.log('beforeEach');
-        let len = _this.computedList.length
-        if(from.path == '/homepage'){
-          _this.show = false
-          setTimeout(function(){
+      _this.$store.state.sliderShow = true // 改变store中sliderbar的状态
+
+      if(_this.$store.state.sliderLoadFirst){//判断是否为第一次创建sliderbar
+
+        _this.$router.beforeEach(function(to,from,next){
+          let len = _this.computedList.length //获取列表长度
+
+          if(from.path == '/homepage'){
+            _this.$store.state.sliderShow = false //销毁sliderbar
+            setTimeout(function(){
+              _this.$store.state.sliderLoadFirst = false //更改sliderLoadFirst（第一次创建sliderbar）状态为false
+              next() //继续执行下去
+            },200*len);//计算下个路由前的总延时
+          }else{
             next()
-          },200*len);
-        }else{
-          next()
-        }
+          }
 
+        })
 
-      })
+      }
+
     },
     mounted(){
       console.log('mounted')
@@ -166,18 +174,5 @@ import $ from 'jquery'
 <style>
   .slider-bar{width:100%;padding:1rem;position:relative;color:#fff;border-bottom: 1px solid rgba(0, 0, 0, 0.1);border-top: 1px solid rgba(255, 255, 255, 0.07);perspective: 500px}
   .slider-bar-inner{width:100%;height:100%;transition:all 0.3s ease;transform: translateZ(0px);}
-  .slider-left-enter-active{
-    transition:left 0.5s ease;
-    left:0;
-  }
-  .slider-left-leave-active{
-    transition:left 0.3s ease;
-    left:-100%;
-  }
-  .slider-left-enter{
-    left:-100%;
-  }
-  .slider-left-leave{
-    left:0;
-  }
+
 </style>

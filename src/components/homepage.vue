@@ -29,18 +29,5 @@
 </script>
 <style>
   .pagebox{position:relative;}
-  .hello-leave-active{
-    transition:right 3s ease;
-    right:-100%;
-  }
-  .hello-enter-active{
-    transition:right 3s ease;
-    right:0;
-  }
-  .hello-enter{
-    right:-100%
-  }
-  .hello-leave{
-    right:0;
-  }
+
 </style>

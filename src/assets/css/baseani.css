@@ -1,0 +1,33 @@
+@charset "utf-8";
+/* CSS Document */
+.slider-left-enter-active{
+  transition:left 0.5s ease;
+  left:0;
+}
+.slider-left-leave-active{
+  transition:left 0.3s ease;
+  left:-100%;
+}
+.slider-left-enter{
+  left:-100%;
+}
+.slider-left-leave{
+  left:0;
+}
+/*sliderbar*/
+
+.fade-leave-active{
+  transition:opacity 3s ease;
+  opacity:0;
+}
+.fade-enter-active{
+  transition:opacity 3s ease;
+  opacity:1;
+}
+.fade-enter{
+  opacity:0;
+}
+.fade-leave{
+  opacity:1;
+}
+/*fade*/

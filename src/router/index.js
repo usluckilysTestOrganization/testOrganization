@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import hello from '@/components/Hello'
 import index from '@/components/index'
 import homepage from '@/components/homepage'
+import sliderbar from '@/components/anicomp/sliderbar'
 
 Vue.use(Router)
 
@@ -14,6 +15,7 @@ export default new Router({
       component: index
     },
     {path:'/homepage',name:'homepage',component:homepage},
-    {path:'/details',name:'details',component:hello}
+    {path:'/details',name:'details',component:hello},
+    {path:'/sliderbar',name:'sliderbar',component:sliderbar}
   ]
 })

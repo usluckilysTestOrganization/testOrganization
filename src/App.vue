@@ -10,3 +10,4 @@ export default {
 }
 </script>
 <style src="./assets/css/base.css"></style>
+<style src="./assets/css/baseani.css"></style>

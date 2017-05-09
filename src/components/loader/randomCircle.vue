@@ -31,12 +31,14 @@
         let circles = []//存放圆的数组
 
         for(let i = 0;i<rNum;i++){
-          let x = _this.random(w,0),//坐标x
-              y = _this.random(h,0),//坐标y
-              radius = _this.random(15,10),//半径
-              xa = _this.random(2,-1),//x轴加速度
-            ya = _this.random(2,-1),//y轴加速度
-              color = "rgba("+_this.random(255,0)+","+_this.random(255,0)+","+_this.random(255,0)+",40%)";
+          let psI = _this.psI , rd = _this.random;
+
+          let x = rd(w,0),//坐标x
+              y = rd(h,0),//坐标y
+              radius = rd(15,10),//半径
+              xa = rd(2,-1),//x轴加速度
+              ya = rd(2,-1),//y轴加速度
+              color = "rgba("+psI(rd(255,0))+","+psI(rd(255,0))+","+psI(rd(255,0))+",0.4)";
           //随机生成圆的各种参数
 
           circles.push({
@@ -48,6 +50,7 @@
             color:color
           })
         }
+
 
         for(let i in circles){
           cxt.fillStyle = circles[i].color;
@@ -67,7 +70,7 @@
             c.x += c.xa;//改变x轴值
             c.y += c.ya;//改变y轴值
 
-            //判断圆心坐标是否超出边界，是则将加速度乘-1已转换方向
+            //判断圆心坐标是否超出边界，是则将加速度乘-1以转换方向
             c.xa *= (c.x > rc.width || c.x <= 0) ? -1 : 1;
             c.ya *= (c.y > rc.height || c.y <= 0) ? -1 : 1;
 
@@ -82,12 +85,15 @@
 
         setInterval(function(){
           animation();
-        },1000/30);
+        },1000/60);
         //此处时间相当于一秒绘制帧数
 
       },
       random(x,y){
         return Math.random()*x+y
+      },
+      psI(x){
+        return parseInt(x)//貌似webkit的浏览器rgba前三个颜色值必须为正整数
       }
     },
     mounted(){

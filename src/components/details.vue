@@ -2,7 +2,7 @@
   <transition name="fade">
     <div class="all">
       <h4>{{ obj.title }}</h4>
-      <div>
+      <div style="background:rgba(135,125,123,0.4)">
         {{ obj.content }}
       </div>
     </div>

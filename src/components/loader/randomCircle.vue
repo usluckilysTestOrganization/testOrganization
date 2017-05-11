@@ -18,7 +18,7 @@
         let rc = document.getElementById('randomCircle'),
           _this = this,
           cxt  = rc.getContext('2d'),
-          rNum = _this.random(15,550),
+          rNum = _this.random(15,450),
           w = $(window).width(),
           h = $(window).height();
 
@@ -35,9 +35,9 @@
 
           let x = rd(w,0),//坐标x
               y = rd(h,0),//坐标y
-              radius = rd(1,1),//半径
-              xa = rd(2,-1),//x轴速度
-              ya = rd(2,-1),//y轴速度
+              radius = rd(1,2),//半径
+              xa = rd(3,-2),//x轴速度
+              ya = rd(3,-2),//y轴速度
               color = "rgba("+psI(rd(255,0))+","+psI(rd(255,0))+","+psI(rd(255,0))+",0.4)";
           //随机生成圆的各种参数
 
@@ -71,6 +71,7 @@
             c.y += c.ya;//改变y轴值
             if(dot && dot.x && dot.y && !surround){
               c.xa *= ( (c.x > dot.x && c.xa > 0) || (c.x < dot.x && c.xa < 0) ) ? -1 : 1;
+              //x坐标大于趋近点x坐标且xa为正，或x坐标小于趋近点x坐标且xa为负，则改变速度方向；y坐标同理
               c.ya *= ( (c.y > dot.y && c.ya > 0) || (c.y < dot.y && c.ya < 0) ) ? -1 : 1;
 //              console.log(c.xa.toFixed(2)+","+psI(c.x)+','+psI(dot.x));
             }else if(dot && dot.x && dot.y && surround){
@@ -78,21 +79,23 @@
 //              console.log(dotDistance)
               if(dotDistance > 50){
                 c.xa *= ( (c.x > dot.x && c.xa > 0) || (c.x < dot.x && c.xa < 0) ) ? -1 : 1;
-              }else if(dotDistance < 40){
+//                c.xa = ( c.x < (dot.x+c.xa) && c.x > (dot.x-c.xa) ) ? 0 : c.xa
+              }else if(dotDistance < 15){
                 c.xa *= ( (c.x > dot.x && c.xa > 0) || (c.x < dot.x && c.xa < 0) ) ? 1 : -1;
               }
               if(dotDistance > 50){
                 c.ya *= ( (c.y > dot.y && c.ya > 0) || (c.y < dot.y && c.ya < 0) ) ? -1 : 1;
-              }else if(dotDistance < 40){
+//                c.ya = ( c.y < (dot.y+c.ya) && c.y > (dot.y-c.ya) ) ? 0 : c.ya
+              }else if(dotDistance < 15){
                 c.ya *= ( (c.y > dot.y && c.ya > 0) || (c.y < dot.y && c.ya < 0) ) ? 1 : -1;
               }
-
-
             }else{
               //判断圆心坐标是否超出边界，是则将速度乘-1以转换方向
               c.xa *= (c.x > rc.width || c.x <= 0) ? -1 : 1;
               c.ya *= (c.y > rc.height || c.y <= 0) ? -1 : 1;
             }
+
+
 
             //根据状态参数重新绘制圆
             cxt.fillStyle = c.color;
@@ -104,16 +107,16 @@
         };
 
         //test
-        let testDot = {x:100,y:100};
+        let rdDot = {x:100,y:100};
         let testsh = setInterval(function(){
-          testDot.x = rd(rc.width,0);
-          testDot.y = rd(rc.height,0);
-        },100000)
+          rdDot.x = rd(rc.width,0);
+          rdDot.y = rd(rc.height,0);
+        },10000)
         //test,自动生成趋近点
 
         setInterval(function(){
-          animation(touch.start,true);
-        },1000/30);
+          animation(rdDot,true);
+        },1000/60);
         //此处时间相当于一秒绘制帧数
 
       },

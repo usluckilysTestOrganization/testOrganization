@@ -4,7 +4,7 @@
   >
     <div class="loader-box">
       <div class="loader-pic" @click="picAni()">
-        <img :src="headPic"/>
+        <img :src="headPic" />
       </div>
     </div>
   </transition>

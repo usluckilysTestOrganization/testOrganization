@@ -4,6 +4,7 @@ import details from '@/components/details'
 import index from '@/components/index'
 import homepage from '@/components/homepage'
 import sliderbar from '@/components/anicomp/sliderbar'
+import randomcircle from '@/components/loader/randomCircle'
 
 Vue.use(Router)
 
@@ -16,6 +17,7 @@ export default new Router({
     },
     {path:'/homepage',name:'homepage',component:homepage},
     {path:'/details/:index',name:'details',component:details},
-    {path:'/sliderbar',name:'sliderbar',component:sliderbar}
+    {path:'/sliderbar',name:'sliderbar',component:sliderbar},
+    {path:'/randomcircle',name:'randomcircle',component:randomcircle}
   ]
 })

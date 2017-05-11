@@ -19,11 +19,11 @@
           v-bind:key="item.id"
           v-bind:data-index="index"
           @click="test($event,index)"
-          :style="'background-color:rgb(48,'+(index*3+150)+', 247)'"
+          :style="'background-color:rgb(48,'+(index*4+150)+', 247)'"
           v-if="$store.state.sliderShow"
       >
 
-        <div class="slider-bar-inner" >{{ item.msg }} {{ $store.state.sliderShow }}</div>
+        <div class="slider-bar-inner" >{{ item.msg }}</div>
 
       </li>
 
